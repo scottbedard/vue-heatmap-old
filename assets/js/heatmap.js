@@ -256,7 +256,6 @@ new Vue({
         // Set the details to a given day
         //
         setDetails: function(day) {
-            console.log ('hey');
             this.details = day;
         },
     },
