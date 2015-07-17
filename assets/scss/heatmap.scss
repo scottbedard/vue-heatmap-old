@@ -1,0 +1,20 @@
+/**
+ * Vue Heatmap
+ * http://github.com/scottbedard/vue-heatmap
+ */
+
+//
+// CSS Reset
+//
+$html-background-color: #F9F9F9;
+$root-font-family: 'Open Sans', sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+@import "vendor/sanitize";
+
+//
+// Heatmap
+//
+@import "components/layout";
+@import "components/toolbar";
+@import "components/chart";
+@import "components/legend";

@@ -1,0 +1,26 @@
+.section {
+
+    padding: 20px;
+
+    &:not(:first-of-type) {
+        padding-top: 0;
+    }
+
+    .inner {
+        background-color: #fff;
+        color: #222;
+        overflow: hidden;
+        padding: 20px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    input[type="color"] {
+        cursor: pointer;
+    }
+
+}

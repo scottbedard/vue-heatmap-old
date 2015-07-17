@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>VueJS Heatmap</title>
+        <meta name="author" content="Scott Bedard" />
+        <link rel="stylesheet" type="text/css" href="assets/bin/heatmap.min.css" />
+    </head>
+    <body class="vue">
+
+        <!-- Toolbar -->
+        <div class="section toolbar">
+            <div class="inner">
+                <div class="config">
+                    <h1>Config</h1>
+                    <div class="row">
+                        <div class="left">
+                            <label for="empty">Empty</label>
+                        </div>
+                        <div class="right">
+                            <input id="empty" type="color" v-model="config.empty" v-on="input: blend" />
+                            <span class="monospace">{{ config.empty }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="left">
+                            <label for="cold">Cold</label>
+                        </div>
+                        <div class="right">
+                            <input id="cold" type="color" v-model="config.cold" v-on="input: blend" />
+                            <span class="monospace">{{ config.cold }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="left">
+                            <label for="hot">Hot</label>
+                        </div>
+                        <div class="right">
+                            <input id="hot" type="color" v-model="config.hot" v-on="input: blend" />
+                            <span class="monospace">{{ config.hot }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="left">
+                            <label for="blend">Blending</label>
+                        </div>
+                        <div class="right">
+                            <input id="blend" type="range" v-model="config.blend" v-on="input: blend" min="0" max="15" step="1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <h1>Actions</h1>
+                    <div>
+                        <button v-on="click: addHeat">Populate</button>
+                        <button v-on="click: clear">Clear</button>
+                    </div>
+                    <div class="caption">The heatmap can also be populated by clicking on individual days.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="section chart">
+            <div class="inner">
+                <h1>Heatmap</h1>
+                <div class="data">
+                    <ul v-repeat="week: weeks" v-style="width: cellWidth">
+                        <li v-repeat="day: week">
+                            <span
+                                class="cell"
+                                v-on="click: addHeatSingle(day), mouseover: setDetails(day)"
+                                v-style="background-color: day.color" >
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="details" v-if="details">
+                    <div><strong>Date:</strong> {{ details.date }}</div>
+                    <div><strong>Heat:</strong> {{ details.heat }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="section legend">
+            <div class="inner">
+                <h1>Legend</h1>
+                <ul>
+                    <li v-repeat="key: legend">
+                        <span class="cell" v-style="background-color: key.color"></span>
+                        <template v-if="key.min == key.max">{{ key.min }}</template>
+                        <template v-if="key.min < key.max">{{ key.min }} to {{ key.max }}</template>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.7/vue.min.js"></script>
+        <script type="text/javascript" src="assets/bin/heatmap.min.js"></script>
+    </body>
+</html>
